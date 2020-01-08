@@ -120,7 +120,10 @@ const player = {
     y: 200,
     speed: 5,
     dx: 0,
-    dy: 0
+    dy: 0,
+    objX:50,
+    objY:500,
+    total:0
 };
 
 function drawPlayer() {
@@ -135,6 +138,21 @@ function newPos() {
     player.x += player.dx;
     player.y += player.dy;
     detectWalls();
+    detectObject();
+}
+function detectObject(){
+    if(player.x +25 >= player.objX && player.x+25<=player.objX+25 && player.y + 35 >= player.objY && player.y<=player.objY+25){
+        console.log('Collected');
+        player.objX = Math.floor((Math.random() * 575) + 1);
+        player.objY = Math.floor((Math.random() * 575) + 1);
+        player.total++;
+        console.log(player.total);
+        updateScore();
+    }
+
+}
+function updateScore(){
+    document.getElementById("totalScore").innerHTML = player.total;
 }
 
 function detectWalls() {
@@ -156,13 +174,35 @@ function detectWalls() {
     }
 }
 
+function generateObj(){
+  
+    
+
+   
+    ctx.fillStyle = 'red';
+    ctx.fillRect(player.objX,player.objY,25,25);
+    
+   
+   
+ 
+}
+let count = 0;
 function update() {
     clear();
-    drawPlayer();
 
+    // let randomX = Math.floor((Math.random() * 575) + 1); 
+    // let randomY = Math.floor((Math.random() * 575) + 1); 
+    
+   
+    generateObj();
+        
+    
+    drawPlayer();
+    
     newPos();
 
     requestAnimationFrame(update);
+    
 }
 
 function moveUp() {
@@ -208,6 +248,7 @@ function keyUp(e) {
         player.dy = 0;
     }
 }
+
 update();
 
 document.addEventListener('keydown', keyDown);

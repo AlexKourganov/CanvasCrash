@@ -19,3 +19,10 @@ body {
   #source{
       display: none;
   }
+  #score{
+      margin-top: 5rem;
+  }
+  #totalScore{
+      
+      font-size: 5rem;
+  }
